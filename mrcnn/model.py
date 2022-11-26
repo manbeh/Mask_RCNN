@@ -30,6 +30,17 @@ from distutils.version import LooseVersion
 assert LooseVersion(tf.__version__) >= LooseVersion("1.3")
 assert LooseVersion(keras.__version__) >= LooseVersion('2.0.8')
 
+### Adding swish activation######################################################################
+from keras.utils.generic_utils import get_custom_objects
+from keras import backend as K
+from keras.layers import Activation
+
+def swish_activation(x):
+        return (K.sigmoid(x) * x)
+
+get_custom_objects().update({'swish_activation': Activation(swish_activation)})
+
+##################################################################################################
 
 ############################################################
 #  Utility Functions
